@@ -24,7 +24,8 @@ private:
     int studentList[10];
 };
 
-Books::Books(){
+Books::Books()
+{
     
 }
 
