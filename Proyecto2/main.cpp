@@ -1,12 +1,16 @@
-//
-//  main.cpp
-//  Proyecto2
-//
-//  Created by Ricardo Ramirez on 2/28/18.
-//  Copyright © 2018 Ricardo Ramirez. All rights reserved.
-//
+/*
+  main.cpp
+  Proyecto2
+
+  Created by Ricardo Ramirez and Juan Pablo Ramos on 2/28/18
+ 
+*/
 
 #include <iostream>
+#include <string>
+#include "Books.h"
+
+using namespace std;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
