@@ -21,9 +21,17 @@ class Books {
         //Getters
         Date getDateBorrowed();
         int getDaysBorrwed();
+        string getLibKey();
+        string getTitle();
+        string getISBN();
     
+        
         //Setters
-    
+        void setDateBorrowed(Date);
+        void setDaysBorrowed(int);
+        void setLibKey(string);
+        void setTitle(string);
+        void setISBN(string);
 	private:
 		Date dateBorrowed;
 		int daysBorrowed, cuantityBorrowed;
