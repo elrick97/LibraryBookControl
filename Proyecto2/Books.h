@@ -16,6 +16,13 @@ class Books {
 	public:
 		//constructors
 		Books();
+    
+        //Getters
+        Date getDateBorrowed();
+        int getDaysBorrwed();
+    
+        //Setters
+    
 	private:
 		Date dateBorrowed;
 		int daysBorrowed, cuantityBorrowed;
@@ -23,9 +30,15 @@ class Books {
 		int studentList[10];
 };
 
+//-------haz el constructor default JP----------
 Books::Books()
 {
     
+
 }
+
+
+
+
 
 #endif /* Books_h */
