@@ -7,21 +7,20 @@
 
 #ifndef Books_h
 #define Books_h
+#include "Date.h"
+#include "Student.h"
 
 using namespace std;
 
 class Books {
-public:
-    //constructors
-    Books();
-private:
-//    Date Date_borrow;
-    int daysBorrowed;
-    string title;
-    string bibKey;
-    string ISBN;
-    int borrowed;
-    int studentList[10];
+	public:
+		//constructors
+		Books();
+	private:
+		Date dateBorrowed;
+		int daysBorrowed, cuantityBorrowed;
+		string title, libKey, ISBN;
+		int studentList[10];
 };
 
 Books::Books()
