@@ -9,6 +9,7 @@
 #define Books_h
 #include "Date.h"
 #include "Student.h"
+#include "Library.h"
 
 using namespace std;
 
