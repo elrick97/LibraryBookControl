@@ -26,6 +26,8 @@
 		0B7A161520502CCF00B7961D /* Date.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Date.h; sourceTree = "<group>"; };
 		0B7A161620504AF300B7961D /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
 		0B7A161720504F3700B7961D /* Library.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
+		5F6882DD20573B1600563CA9 /* Alumnos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Alumnos.txt; sourceTree = "<group>"; };
+		5F6882DE20573B3E00563CA9 /* Biblioteca.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Biblioteca.txt; sourceTree = "<group>"; };
 		5F7F82682046F28300AE431E /* Proyecto2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Proyecto2; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F7F826B2046F28300AE431E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5F7F8272204729D300AE431E /* Books.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Books.h; sourceTree = "<group>"; };
@@ -66,6 +68,8 @@
 				0B7A161520502CCF00B7961D /* Date.h */,
 				0B7A161620504AF300B7961D /* Student.h */,
 				0B7A161720504F3700B7961D /* Library.h */,
+				5F6882DD20573B1600563CA9 /* Alumnos.txt */,
+				5F6882DE20573B3E00563CA9 /* Biblioteca.txt */,
 			);
 			path = Proyecto2;
 			sourceTree = "<group>";

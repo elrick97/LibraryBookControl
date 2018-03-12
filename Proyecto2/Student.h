@@ -19,17 +19,17 @@ class Student
 		Student(int, string, string);
 		// Getters
 		int getStudentId();
-		string getMayor();
+		string getMajor();
 		string getName();
 		// Setters
 		void setStudentId(int);
-		void setMayor(string);
+		void setMajor(string);
 		void setName(string);
 		// Operation
 		void Show();
 	private:
 		int studentId;
-		string mayor, name;
+		string major, name;
 };
 
 //-------------------------------------Function Definition---------------------------------------------------
@@ -37,14 +37,14 @@ class Student
 Student::Student()
 {
 	studentId = 0;
-	mayor = "";
+	major = "";
 	name = "";
 }
 
 Student::Student(int ID, string m, string n)
 {
 	studentId = ID;
-	mayor = m;
+	major = m;
 	name = n;
 }
 
@@ -54,9 +54,9 @@ int Student::getStudentId()
 	return studentId;
 }
 
-string Student::getMayor()
+string Student::getMajor()
 {
-	return mayor;
+	return major;
 }
 string Student::getName()
 {
@@ -69,9 +69,9 @@ void Student::setStudentId(int ID)
 	studentId = ID;
 }
 
-void Student::setMayor(string m)
+void Student::setMajor(string m)
 {
-	mayor = m;
+	major = m;
 }
 void Student::setName(string n)
 {
@@ -82,7 +82,7 @@ void Student::setName(string n)
 void Student::Show()
 {
 	cout << "Student ID: " << studentId << endl;
-	cout << "Mayor: " << mayor << endl;
+	cout << "Major: " << major << endl;
 	cout << "Name: " << name << endl;
 }
 

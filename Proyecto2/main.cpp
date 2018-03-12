@@ -12,8 +12,32 @@
 
 using namespace std;
 
-int main(int argc, const char * argv[])
+int main()
 {
-
+    Library lib[5];
+    Student stu[15];
+    Books book[10];
+    int bookNum;
+    cout << "How many books do you want to register?\n";
+    cin >> bookNum;
+    
+    if (bookNum < 10)
+    {
+        for (int i = 0; i < bookNum; i++)
+        {
+            cout << "";
+        }
+    }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
