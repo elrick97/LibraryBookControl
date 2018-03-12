@@ -79,7 +79,7 @@ void Date::setYYYY(int y)
 }
 
 // Operation
-void Show()
+void Date::Show()
 {
 	cout << dd << "/" << mm << "/" << yyyy << endl;
 }
