@@ -66,6 +66,36 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 		book[bookPosition].
 	}
 }
+void fillArrays(Library lib[5], Student stu[15])
+{
+    string line, major, name, line2;
+    string key, libKey;
+    int floor, shelf;
+    int id, count = 0;;
+    ifstream students, library;
+    students.open("Alumnos.txt");
+    library.open("Biblioteca.txt");
+    while(getline(students, line))
+    {
+        cin >> id >> major;
+        cin.ignore();
+        getline(cin, name);
+        stu[count].setStudentId(id);
+        stu[count].setMajor(major);
+        stu[count].setName(name);
+        count++;
+    }
+    count = 0;
+    while(getline(library, line2))
+    {
+        cin >> libKey >> floor >> shelf >> key;
+        lib[count].setLibKey(libKey);
+        lib[count].setFloor(floor);
+        lib[count].setShelf(shelf);
+        lib[count].setKey(key);
+        count++;
+    }
+}
 
 int main()
 {
