@@ -21,6 +21,7 @@ void showBookList(int bookNum, Books books[10])
 		cout << "Title: " << books[i].getTitle() << endl;
 		cout << "Library: " << books[i].getLibKey() << endl;
 		cout << "ISBN: " << books[i].getISBN() << endl;
+		cout << "Quantity Borrowed: " << books[i].getCuantityBorrowed() << endl;
 		cout << "------------------------------------";
 	}
 }
@@ -36,6 +37,7 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 	cout << "Enter student ID\n";
 	cin >> stdtID;
 	
+	// Searching for ISBN
 	for (int i=0; i < bookNum; i++)
 	{
 		if (book[i].getISBN() == isbn)
@@ -43,11 +45,13 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 			isbnFound = true;
 			bookPosition = i;
 		}
-		else
-		{
-			cout << "Book wasn't found!\n";
-		}
 	}
+	if (!isbnFound)
+	{
+		cout << "Book wasn't found!\n";
+	}
+	
+	// Searching for student ID
 	for (int i=0; i < 16; i++)
 	{
 		if (stu[i].getStudentId() == stdtID)
@@ -55,10 +59,10 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 			IDFound = true;
 			studentPosition = i;
 		}
-		else
-		{
-			cout << "Student wasn't found!\n";
-		}
+	}
+	if (!IDFound)
+	{
+		cout << "Student wasn't found!\n";
 	}
 	
 	if (isbnFound && IDFound)
@@ -92,6 +96,29 @@ void SearchBookByDate(Books book[10], int bookNum)
 			cout << "Date Borrowed: ";
 			book[i].getDateBorrowed().Show();
 		}
+	}
+}
+
+void SearchBookByISBN(Books book[10], int bookNum)
+{
+	string isbn;
+	bool isbnFound = false;
+	cout << "Enter ISBN\n";
+	cin >> isbn;
+	
+	for (int i=0; i < bookNum; i++)
+	{
+		if (book[i].getISBN() == isbn)
+		{
+			cout << "Title: " << book[i].getTitle() << endl;
+			cout << "Library: " << book[i].getLibKey() << endl;
+			cout << "Quantity Borrowed: " << book[i].getCuantityBorrowed() << endl;
+			isbnFound = true;
+		}
+	}
+	if(!isbnFound)
+	{
+		cout << "ISBN wasn't found!\n";
 	}
 }
 
@@ -145,7 +172,7 @@ int main()
 						BorrowBook(book, bookNum, stu);
                         break;
                     case '3':
-                        //Books to be turned on X date
+						SearchBookByDate(book, bookNum);
                         break;
                     case '4':
                         //ISBN book search
