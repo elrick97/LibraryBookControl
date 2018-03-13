@@ -147,7 +147,7 @@ bool Books::borrow(string isbn, int stdtID)
 	}
 	if (!repeated)
 	{
-		studentList[cuantityBorrowed+1] = stdtID;
+		studentList[cuantityBorrowed] = stdtID;
 		cuantityBorrowed++;
 	}
 	return !repeated;

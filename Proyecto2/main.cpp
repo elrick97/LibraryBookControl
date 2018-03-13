@@ -25,10 +25,10 @@ void showBookList(int bookNum, Books books[10])
 	}
 }
 
-void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
+void BorrowBook(Books book[10],int bookNum, Student stu[15])
 {
 	string isbn;
-	int stdtID, bookPosition, studentPosition;
+	int stdtID, bookPosition = 0, studentPosition;
 	bool isbnFound = false;
 	bool IDFound = false;
 	cout << "Enter book ISBN\n";
@@ -48,7 +48,7 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 			cout << "Book wasn't found!\n";
 		}
 	}
-	for (int i=0; i < countStudents; i++)
+	for (int i=0; i < 16; i++)
 	{
 		if (stu[i].getStudentId() == stdtID)
 		{
@@ -63,7 +63,35 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 	
 	if (isbnFound && IDFound)
 	{
-		book[bookPosition].
+		book[bookPosition].borrow(isbn, stdtID);
+		cout << "Book borrowed succesfully." << endl;
+	}
+	else
+	{
+		cout << "Cound't borrow book." << endl;
+	}
+}
+
+void SearchBookByDate(Books book[10], int bookNum)
+{
+	int d, m, y;
+	cout << "Enter day of return\n";
+	cin >> d;
+	cout << "Enter month of return\n";
+	cin >> m;
+	cout << "Enter year of return\n";
+	cin >> y;
+	
+	for (int i=0; i < bookNum; i++)
+	{
+		if (book[i].calculateReturnDate().getDD() == d && book[i].calculateReturnDate().getMM() == m && book[i].calculateReturnDate().getYYYY() == y)
+		{
+			cout << "Title: " << book[i].getTitle() << endl;
+			cout << "Library: " << book[i].getLibKey() << endl;
+			cout << "ISBN: " << book[i].getISBN() << endl;
+			cout << "Date Borrowed: ";
+			book[i].getDateBorrowed().Show();
+		}
 	}
 }
 
@@ -72,7 +100,7 @@ int main()
     Library lib[5];
     Student stu[15];
     Books book[10];
-    int bookNum, countStudents;
+    int bookNum;
     char op, daysBorrow;
     string title, ISBN, LibKey;
     cout << "How many books do you want to register?\n";
@@ -114,7 +142,7 @@ int main()
                         showBookList(bookNum, book);
                         break;
                     case '2':
-                        //Borrow a book
+						BorrowBook(book, bookNum, stu);
                         break;
                     case '3':
                         //Books to be turned on X date
