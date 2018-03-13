@@ -12,12 +12,52 @@
 
 using namespace std;
 
+void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
+{
+	string isbn;
+	int stdtID;
+	bool isbnFound = false;
+	bool IDFound = false;
+	cout << "Enter book ISBN\n";
+	cin >> isbn;
+	cout << "Enter student ID\n";
+	cin >> stdtID;
+	
+	for (int i=0; i < bookNum; i++)
+	{
+		if (book[i].getISBN() == isbn)
+		{
+			isbnFound = true;
+		}
+		else
+		{
+			cout << "Book wasn't found!\n";
+		}
+	}
+	for (int i=0; i < countStudents; i++)
+	{
+		if (stu[i].getStudentId() == stdtID)
+		{
+			IDFound = true;
+		}
+		else
+		{
+			cout << "Student wasn't found!\n";
+		}
+	}
+	
+	if (isbnFound && IDFound)
+	{
+		
+	}
+}
+
 int main()
 {
     Library lib[5];
     Student stu[15];
     Books book[10];
-    int bookNum;
+    int bookNum, countStudents;
     char op;
     string title, ISBN, LibKey;
     cout << "How many books do you want to register?\n";
