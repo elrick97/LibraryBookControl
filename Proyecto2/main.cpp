@@ -16,6 +16,7 @@ void showBookList(int bookNum, Books books[10])
 {
     for (int i = 0; i < bookNum ; i++)
     {
+        cout << "------------------------------------";
         cout << "Book #" << i+1;
         cout << "Title: " << books[i].getTitle() << endl;
         cout << "Library: " << books[i].getLibKey() << endl;
