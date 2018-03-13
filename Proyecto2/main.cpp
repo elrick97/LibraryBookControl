@@ -165,7 +165,7 @@ void SearchBookByStudent(Books book[10], int bookNum)
 	// Asking user for student 
 }
 
-void fillArrays(Library (&lib)[5], Student (&stu)[15])
+void fillArrays(Library lib[], Student stu[])
 {
     string line, major, name, line2;
     string key, libKey;
@@ -187,8 +187,10 @@ void fillArrays(Library (&lib)[5], Student (&stu)[15])
         count++;
     }
     count = 0;
-    while(getline(library, line2))
+    while(!getline(library, line2))
     {
+		//getline(library, line2);
+		cout << line2 << endl;
         cin >> libKey >> floor >> shelf >> key;
 		lib[count].setLibKey(libKey);
 		lib[count].setFloor(floor);
@@ -198,6 +200,9 @@ void fillArrays(Library (&lib)[5], Student (&stu)[15])
     }
 	students.close();
 	library.close();
+	for (int i = 0; i < 5; i++) {
+		lib[i].Show();
+	}
 }
 
 int main()
