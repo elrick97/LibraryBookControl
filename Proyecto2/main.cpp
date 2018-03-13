@@ -21,14 +21,15 @@ void showBookList(int bookNum, Books books[10])
 		cout << "Title: " << books[i].getTitle() << endl;
 		cout << "Library: " << books[i].getLibKey() << endl;
 		cout << "ISBN: " << books[i].getISBN() << endl;
+		cout << "Quantity Borrowed: " << books[i].getCuantityBorrowed() << endl;
 		cout << "------------------------------------";
 	}
 }
 
-void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
+void BorrowBook(Books book[10],int bookNum, Student stu[15])
 {
 	string isbn;
-	int stdtID, bookPosition, studentPosition;
+	int stdtID, bookPosition = 0, studentPosition;
 	bool isbnFound = false;
 	bool IDFound = false;
 	cout << "Enter book ISBN\n";
@@ -36,6 +37,7 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 	cout << "Enter student ID\n";
 	cin >> stdtID;
 	
+	// Searching for ISBN
 	for (int i=0; i < bookNum; i++)
 	{
 		if (book[i].getISBN() == isbn)
@@ -43,27 +45,80 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 			isbnFound = true;
 			bookPosition = i;
 		}
-		else
-		{
-			cout << "Book wasn't found!\n";
-		}
 	}
-	for (int i=0; i < countStudents; i++)
+	if (!isbnFound)
+	{
+		cout << "Book wasn't found!\n";
+	}
+	
+	// Searching for student ID
+	for (int i=0; i < 16; i++)
 	{
 		if (stu[i].getStudentId() == stdtID)
 		{
 			IDFound = true;
 			studentPosition = i;
 		}
-		else
-		{
-			cout << "Student wasn't found!\n";
-		}
+	}
+	if (!IDFound)
+	{
+		cout << "Student wasn't found!\n";
 	}
 	
 	if (isbnFound && IDFound)
 	{
-		book[bookPosition].
+		book[bookPosition].borrow(isbn, stdtID);
+		cout << "Book borrowed succesfully." << endl;
+	}
+	else
+	{
+		cout << "Cound't borrow book." << endl;
+	}
+}
+
+void SearchBookByDate(Books book[10], int bookNum)
+{
+	int d, m, y;
+	cout << "Enter day of return\n";
+	cin >> d;
+	cout << "Enter month of return\n";
+	cin >> m;
+	cout << "Enter year of return\n";
+	cin >> y;
+	
+	for (int i=0; i < bookNum; i++)
+	{
+		if (book[i].calculateReturnDate().getDD() == d && book[i].calculateReturnDate().getMM() == m && book[i].calculateReturnDate().getYYYY() == y)
+		{
+			cout << "Title: " << book[i].getTitle() << endl;
+			cout << "Library: " << book[i].getLibKey() << endl;
+			cout << "ISBN: " << book[i].getISBN() << endl;
+			cout << "Date Borrowed: ";
+			book[i].getDateBorrowed().Show();
+		}
+	}
+}
+
+void SearchBookByISBN(Books book[10], int bookNum)
+{
+	string isbn;
+	bool isbnFound = false;
+	cout << "Enter ISBN\n";
+	cin >> isbn;
+	
+	for (int i=0; i < bookNum; i++)
+	{
+		if (book[i].getISBN() == isbn)
+		{
+			cout << "Title: " << book[i].getTitle() << endl;
+			cout << "Library: " << book[i].getLibKey() << endl;
+			cout << "Quantity Borrowed: " << book[i].getCuantityBorrowed() << endl;
+			isbnFound = true;
+		}
+	}
+	if(!isbnFound)
+	{
+		cout << "ISBN wasn't found!\n";
 	}
 }
 void fillArrays(Library lib[5], Student stu[15])
@@ -102,7 +157,7 @@ int main()
     Library lib[5];
     Student stu[15];
     Books book[10];
-    int bookNum, countStudents;
+    int bookNum;
     char op, daysBorrow;
     string title, ISBN, LibKey;
     cout << "How many books do you want to register?\n";
@@ -144,10 +199,10 @@ int main()
                         showBookList(bookNum, book);
                         break;
                     case '2':
-                        //Borrow a book
+						BorrowBook(book, bookNum, stu);
                         break;
                     case '3':
-                        //Books to be turned on X date
+						SearchBookByDate(book, bookNum);
                         break;
                     case '4':
                         //ISBN book search
