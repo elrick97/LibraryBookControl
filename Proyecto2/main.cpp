@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Books.h"
 
 using namespace std;
@@ -78,6 +79,7 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 
 void SearchBookByDate(Books book[10], int bookNum)
 {
+	// Asking user for return date
 	int d, m, y;
 	cout << "Enter day of return\n";
 	cin >> d;
@@ -86,6 +88,7 @@ void SearchBookByDate(Books book[10], int bookNum)
 	cout << "Enter year of return\n";
 	cin >> y;
 	
+	// Searching for books with compatible return date
 	for (int i=0; i < bookNum; i++)
 	{
 		if (book[i].calculateReturnDate().getDD() == d && book[i].calculateReturnDate().getMM() == m && book[i].calculateReturnDate().getYYYY() == y)
@@ -101,11 +104,13 @@ void SearchBookByDate(Books book[10], int bookNum)
 
 void SearchBookByISBN(Books book[10], int bookNum)
 {
+	// Asking user for ISBN
 	string isbn;
 	bool isbnFound = false;
 	cout << "Enter ISBN\n";
 	cin >> isbn;
 	
+	// Searching for books with same ISBN
 	for (int i=0; i < bookNum; i++)
 	{
 		if (book[i].getISBN() == isbn)
@@ -121,13 +126,40 @@ void SearchBookByISBN(Books book[10], int bookNum)
 		cout << "ISBN wasn't found!\n";
 	}
 }
+
+void SearchBookByLibraryKey(Books book[10], int bookNum)
+{
+	// Asking user for library key
+	string libKey;
+	bool libKeyFound = false;
+	cout << "Enter Library Key\n";
+	cin >> libKey;
+	
+	// Searching for books with same library key
+	for (int i=0; i < bookNum; i++)
+	{
+		if (book[i].getLibKey() == libKey)
+		{
+			cout << "Title: " << book[i].getTitle() << endl;
+			cout << "ISBN: " << book[i].getISBN() << endl;
+			cout << "Quantity Borrowed: " << book[i].getCuantityBorrowed() << endl;
+			libKeyFound = true;
+		}
+	}
+	if (!libKeyFound)
+	{
+		cout << "Library Key wasn't found!\n";
+	}
+}
+
 void fillArrays(Library lib[5], Student stu[15])
 {
     string line, major, name, line2;
     string key, libKey;
     int floor, shelf;
     int id, count = 0;;
-    ifstream students, library;
+	ifstream students;
+	ifstream library;
     students.open("Alumnos.txt");
     library.open("Biblioteca.txt");
     while(getline(students, line))
@@ -135,7 +167,7 @@ void fillArrays(Library lib[5], Student stu[15])
         cin >> id >> major;
         cin.ignore();
         getline(cin, name);
-        stu[count].setStudentId(id);
+		stu[count].setStudentId(id);
         stu[count].setMajor(major);
         stu[count].setName(name);
         count++;
@@ -144,8 +176,8 @@ void fillArrays(Library lib[5], Student stu[15])
     while(getline(library, line2))
     {
         cin >> libKey >> floor >> shelf >> key;
-        lib[count].setLibKey(libKey);
-        lib[count].setFloor(floor);
+		lib[count].setLibKey(libKey);
+		lib[count].setFloor(floor);
         lib[count].setShelf(shelf);
         lib[count].setKey(key);
         count++;
@@ -154,7 +186,7 @@ void fillArrays(Library lib[5], Student stu[15])
 
 int main()
 {
-    Library lib[5];
+	Library lib[5];
     Student stu[15];
     Books book[10];
     int bookNum;
@@ -179,7 +211,7 @@ int main()
 			cout << "Enter days to borrow\n";
 			cin >> daysBorrow;
             
-            book[i].setTitle(title);
+			book[i].setTitle(title);
             book[i].setLibKey(LibKey);
             book[i].setISBN(ISBN);
 			book[i].setDaysBorrowed(daysBorrow);
@@ -205,10 +237,10 @@ int main()
 						SearchBookByDate(book, bookNum);
                         break;
                     case '4':
-                        //ISBN book search
+						SearchBookByISBN(book, bookNum);
                         break;
                     case '5':
-                        //Library book search
+						SearchBookByLibraryKey(book, bookNum);
                         break;
                     case '6':
                         //Student borrowed books
