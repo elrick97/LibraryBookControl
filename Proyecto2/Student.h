@@ -32,7 +32,7 @@ class Student
 		string major, name;
 };
 
-//-------------------------------------Function Definition---------------------------------------------------
+//-------------------------------------Function Definition-----------------------------------------
 // Constructors
 Student::Student()
 {

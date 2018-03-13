@@ -34,7 +34,7 @@ class Library
 		int floor, shelf;
 };
 
-//-------------------------------------Function Definition---------------------------------------------------
+//-------------------------------------Function Definition--------------------------------------------
 // Constructors
 Library::Library()
 {

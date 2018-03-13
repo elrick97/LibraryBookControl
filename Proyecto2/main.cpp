@@ -12,10 +12,23 @@
 
 using namespace std;
 
+void showBookList(int bookNum, Books books[10])
+{
+	for (int i = 0; i < bookNum ; i++)
+	{
+		cout << "------------------------------------";
+		cout << "Book #" << i+1;
+		cout << "Title: " << books[i].getTitle() << endl;
+		cout << "Library: " << books[i].getLibKey() << endl;
+		cout << "ISBN: " << books[i].getISBN() << endl;
+		cout << "------------------------------------";
+	}
+}
+
 void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 {
 	string isbn;
-	int stdtID;
+	int stdtID, bookPosition, studentPosition;
 	bool isbnFound = false;
 	bool IDFound = false;
 	cout << "Enter book ISBN\n";
@@ -28,6 +41,7 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 		if (book[i].getISBN() == isbn)
 		{
 			isbnFound = true;
+			bookPosition = i;
 		}
 		else
 		{
@@ -39,6 +53,7 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 		if (stu[i].getStudentId() == stdtID)
 		{
 			IDFound = true;
+			studentPosition = i;
 		}
 		else
 		{
@@ -48,7 +63,7 @@ void BorrowBook(Books book[10],int bookNum, int countStudents, Student stu[15])
 	
 	if (isbnFound && IDFound)
 	{
-		
+		book[bookPosition].
 	}
 }
 
@@ -58,7 +73,7 @@ int main()
     Student stu[15];
     Books book[10];
     int bookNum, countStudents;
-    char op;
+    char op, daysBorrow;
     string title, ISBN, LibKey;
     cout << "How many books do you want to register?\n";
     cin >> bookNum;
@@ -75,10 +90,14 @@ int main()
             
             cout << "Enter ISBN\n";
             cin >> ISBN;
+			
+			cout << "Enter days to borrow\n";
+			cin >> daysBorrow;
             
             book[i].setTitle(title);
             book[i].setLibKey(LibKey);
             book[i].setISBN(ISBN);
+			book[i].setDaysBorrowed(daysBorrow);
         }
             do {
                 cout << "1) Book List\n";
