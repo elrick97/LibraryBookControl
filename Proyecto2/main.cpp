@@ -67,7 +67,7 @@ int main()
     {
         for (int i = 0; i < bookNum; i++)
         {
-            cout << "Enter book title\n";
+            cout << "Enter book "<<i+1<<" title\n";
             getline(cin, title);
             
             cout << "Enter Library key\n";
@@ -79,7 +79,7 @@ int main()
             book[i].setTitle(title);
             book[i].setLibKey(LibKey);
             book[i].setISBN(ISBN);
-            
+        }
             do {
                 cout << "1) Book List\n";
                 cout << "2) Borrow a book\n";
@@ -92,7 +92,7 @@ int main()
                 
                 switch (op) {
                     case '1':
-                        //Book List
+                        showBookList(bookNum, book);
                         break;
                     case '2':
                         //Borrow a book
@@ -111,7 +111,6 @@ int main()
                         break;
                 }
             }while(op != '7');
-        }
     }
     else
     {
