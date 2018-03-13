@@ -47,7 +47,7 @@ Date::Date(int d, int m, int y)
 	yyyy = y;
 }
 
-// Access Method
+// ----------------------------------Access Method----------------------------------
 int Date::getDD()
 {
 	return dd;
@@ -63,7 +63,7 @@ int Date::getYYYY()
 	return yyyy;
 }
 
-// Modification Method
+// ----------------------------------Modification Method----------------------------------
 void Date::setDD(int d)
 {
 	dd = d;
@@ -78,7 +78,7 @@ void Date::setYYYY(int y)
 	yyyy = y;
 }
 
-// Operation
+// ----------------------------------Operation----------------------------------
 void Date::Show()
 {
 	cout << dd << "/" << mm << "/" << yyyy << endl;

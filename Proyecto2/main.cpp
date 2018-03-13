@@ -2,6 +2,9 @@
   main.cpp
   Proyecto2
 
+ This project simulates a library where you can borrow books as a student and
+ look for specific books by a lot of categories.
+ 
   Created by Ricardo Ramirez and Juan Pablo Ramos on 2/28/18
  
 */
@@ -13,6 +16,15 @@
 
 using namespace std;
 
+/*  showBookList
+ 
+    Display all books
+ 
+ Parameters:
+    Number of books and array of type Book
+ Returns:
+    NONE
+ */
 void showBookList(int bookNum, Books books[10])
 {
 	for (int i = 0; i < bookNum ; i++)
@@ -22,10 +34,18 @@ void showBookList(int bookNum, Books books[10])
 		cout << "Library: " << books[i].getLibKey() << endl;
 		cout << "ISBN: " << books[i].getISBN() << endl;
 		cout << "Quantity Borrowed: " << books[i].getCuantityBorrowed() << endl;
-		cout << "-------------" << endl;
+		cout << "--------------------" << endl;
 	}
 }
-
+/*  BorrowBook
+ 
+  borrow books
+ 
+ Parameters:
+    Number of books, array of type Book and array of type students
+ Returns:
+    NONE
+ */
 void BorrowBook(Books book[10],int bookNum, Student stu[15])
 {
 	string isbn;
@@ -76,15 +96,24 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 		cin >> mm;
 		cout << "Year: ";
 		cin >> yyyy;
-		book[bookPosition].borrow(isbn, stdtID, dd, mm, yyyy);
+        if (book[bookPosition].borrow(isbn, stdtID, dd, mm, yyyy)){
 		cout << "Book borrowed succesfully." << endl;
+        }
 	}
 	else
 	{
 		cout << "Cound't borrow book." << endl;
 	}
 }
+/*  SearchBookByDate
+ 
+ searches book by specific date
 
+ Parameters:
+    Number of books, array of type Book.
+ Returns:
+    NONE
+ */
 void SearchBookByDate(Books book[10], int bookNum)
 {
 	// Asking user for return date
@@ -110,6 +139,15 @@ void SearchBookByDate(Books book[10], int bookNum)
 	}
 }
 
+/*  SearchBookByISBN
+ 
+ searches book by specific ISBN
+
+ Parameters:
+    Number of books, array of type Book.
+ Returns:
+    NONE
+ */
 void SearchBookByISBN(Books book[10], int bookNum)
 {
 	// Asking user for ISBN
@@ -135,6 +173,15 @@ void SearchBookByISBN(Books book[10], int bookNum)
 	}
 }
 
+/*  SearchBookByLibraryKey
+ 
+    searches book by specific library key
+ 
+ Parameters:
+    Number of books, array of type Book.
+ Returns:
+    NONE
+ */
 void SearchBookByLibraryKey(Books book[10], int bookNum)
 {
 	// Asking user for library key
@@ -160,11 +207,54 @@ void SearchBookByLibraryKey(Books book[10], int bookNum)
 	}
 }
 
-void SearchBookByStudent(Books book[10], int bookNum)
+/*  SearchBookByStudent
+ 
+    Searches books borrowed by specific student
+ 
+ Parameters:
+    Number of books, array of type Book and array of type students
+ Returns:
+    NONE
+ */
+void SearchBookByStudent(Books book[], int bookNum, Student stu[])
 {
-	// Asking user for student 
+    int id;
+	// Asking user for student
+    cout << "Enter the student ID" << endl;
+    cin >> id;
+    bool studentExist = false, studentBorrowABook = false;
+    
+    for(int i = 0; i < 15; i++)
+    {
+        if (id == stu[i].getStudentId())
+        {
+            studentExist = true;
+            cout << "Student Name: " << stu[i].getName() << endl;
+            for (int j = 0; j < bookNum; j++)
+            {
+                for (int k = 0; i < bookNum; i++)
+                {
+                    if (stu[i].getStudentId() == book[j].getStudentList(k))
+                    {
+                        studentBorrowABook = true;
+                        cout << "Title: " << book[j].getTitle() << endl;
+                        cout << "ISBN: " << book[j].getISBN() << endl;
+                        cout << "Quantity Borrowed: " << book[j].getCuantityBorrowed() << endl;                    }
+                }
+            }
+        }
+    }
 }
 
+/*  fillArrays
+ 
+    This function is to pass everything from the text file to the arrays
+ 
+ Parameters:
+    array of type Book and array of type students
+ Returns:
+    NONE
+ */
 void fillArrays(Library lib[], Student stu[])
 {
     string line, major, name, line2;
@@ -173,38 +263,32 @@ void fillArrays(Library lib[], Student stu[])
     int id, count = 0;
 	ifstream students;
 	ifstream library;
-    students.open("Alumnos.txt");
+    students.open("Alumnos.txt"); //opening files
     library.open("Biblioteca.txt");
-    while(getline(students, line))
+    
+    while((students >> id >> major) && (getline(students, name))) //filling the array with txt file
     {
-        cin >> id;
-		cin >> major;
-        cin.ignore();
-        getline(cin, name);
 		stu[count].setStudentId(id);
         stu[count].setMajor(major);
         stu[count].setName(name);
         count++;
     }
     count = 0;
-    while(!getline(library, line2))
+    
+    while(library >> libKey >> floor >> shelf >> key) //filling the array with txt file
     {
-		//getline(library, line2);
-		cout << line2 << endl;
-        cin >> libKey >> floor >> shelf >> key;
-		lib[count].setLibKey(libKey);
-		lib[count].setFloor(floor);
+        lib[count].setLibKey(libKey);
+        lib[count].setFloor(floor);
         lib[count].setShelf(shelf);
         lib[count].setKey(key);
         count++;
     }
-	students.close();
+	students.close(); //closing files
 	library.close();
-	for (int i = 0; i < 5; i++) {
-		lib[i].Show();
-	}
 }
 
+/*
+ */
 int main()
 {
 	Library lib[5];
@@ -213,14 +297,15 @@ int main()
     int bookNum;
     char op, daysBorrow;
     string title, ISBN, LibKey;
+    
     cout << "How many books do you want to register?\n";
     cin >> bookNum;
 	
 	fillArrays(lib, stu);
 
-    if (bookNum < 10)
+    if (bookNum < 10) //validating num of book do is not bigger than 10
     {
-        for (int i = 0; i < bookNum; i++)
+        for (int i = 0; i < bookNum; i++) //registering bookNum numbers
         {
             cout << "Enter book "<<i+1<<" title\n";
 			cin.ignore();
@@ -240,7 +325,7 @@ int main()
             book[i].setISBN(ISBN);
 			book[i].setDaysBorrowed(daysBorrow);
         }
-            do {
+            do { //Displaying menu
                 cout << "1) Book List\n";
                 cout << "2) Borrow a book\n";
                 cout << "3) Books to be returned on X date\n";
@@ -250,7 +335,7 @@ int main()
                 cout << "7) Exit\n";
                 cin >> op;
                 
-                switch (op) {
+                switch (op) { //all menu options
                     case '1':
                         showBookList(bookNum, book);
                         break;
@@ -267,10 +352,10 @@ int main()
 						SearchBookByLibraryKey(book, bookNum);
                         break;
                     case '6':
-                        //Student borrowed books
+                        SearchBookByStudent(book, bookNum, stu);
                         break;
                 }
-            }while(op != '7');
+            }while(op != '7'); //if 7 breaks switch
     }
     else
     {
@@ -278,14 +363,3 @@ int main()
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-

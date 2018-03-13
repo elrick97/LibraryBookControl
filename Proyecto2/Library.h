@@ -52,7 +52,7 @@ Library::Library(string k, string lK, int f, int s)
 	shelf = s;
 }
 
-// Getters
+// ----------------------------------Getters----------------------------------
 string Library::getKey()
 {
 	return key;
@@ -73,7 +73,7 @@ int Library::getShelf()
 	return shelf;
 }
 
-// Setters
+// ----------------------------------Setters----------------------------------
 void Library::setKey(string k)
 {
 	key = k;
@@ -94,12 +94,12 @@ void Library::setShelf(int s)
 	shelf = s;
 }
 
-// Operation
+// ----------------------------------Operation----------------------------------
 void Library::Show()
 {
-	cout << "Key: " << key << endl;
-	cout << "Library Key: " << libKey << endl;
-	cout << "Floor: " << floor << endl;
+    cout << "Library Key: " << libKey << endl;
+    cout << "Floor: " << floor << endl;
 	cout << "Shelf: " << shelf << endl;
+    cout << "Key: " << key << endl;
 }
 #endif /* Library_h */

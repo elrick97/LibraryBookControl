@@ -10,9 +10,7 @@
 #include "Date.h"
 #include "Student.h"
 #include "Library.h"
-
 using namespace std;
-
 class Books {
 	public:
 		//constructors
@@ -53,7 +51,7 @@ Books::Books()
 	ISBN = "N/A";
 	dateBorrowed.~Date();
 }
-//Getters
+//----------------------------------Getters----------------------------------
 Date Books::getDateBorrowed()
 {
 	return dateBorrowed;
@@ -82,7 +80,7 @@ int Books::getCuantityBorrowed()
 {
 	return cuantityBorrowed;
 }
-//Setters
+//----------------------------------Setters----------------------------------
 void Books::setDateBorrowed(int d, int m, int y)
 {
 	dateBorrowed.setDD(d);
@@ -105,7 +103,7 @@ void Books::setISBN(string isbn)
 {
 	ISBN = isbn;
 }
-//Operation
+//----------------------------------Operation----------------------------------
 Date Books::calculateReturnDate()
 {
 	int d, m, y;
@@ -114,14 +112,14 @@ Date Books::calculateReturnDate()
 	y = dateBorrowed.getYYYY();
 	d += daysBorrowed;
 	
-	// Making sure day doesn't goes over 31
+	// ----------------------------------Making sure day doesn't goes over 31
 	if (d > 31)
 	{
-		// Calculating day in new month
+		// ----------------------------------Calculating day in new month
 		d -= 31;
 		m++;
 	}
-	// Making sure month doesn't goes over 12
+	// ----------------------------------Making sure month doesn't goes over 12
 	if (m > 12)
 	{
 		m -= 12;
@@ -155,7 +153,4 @@ bool Books::borrow(string isbn, int stdtID, int d, int m, int y)
 	}
 	return !repeated;
 }
-
-
-
 #endif /* Books_h */

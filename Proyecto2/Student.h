@@ -48,7 +48,7 @@ Student::Student(int ID, string m, string n)
 	name = n;
 }
 
-// Getters
+// ----------------------------------Getters----------------------------------
 int Student::getStudentId()
 {
 	return studentId;
@@ -63,7 +63,7 @@ string Student::getName()
 	return name;
 }
 
-// Setters
+// ----------------------------------Setters----------------------------------
 void Student::setStudentId(int ID)
 {
 	studentId = ID;
@@ -78,7 +78,7 @@ void Student::setName(string n)
 	name = n;
 }
 
-// Operation
+// ----------------------------------Operation----------------------------------
 void Student::Show()
 {
 	cout << "Student ID: " << studentId << endl;
