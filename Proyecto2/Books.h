@@ -33,7 +33,7 @@ class Books {
         void setISBN(string);
 		//Operation
 		Date calculateReturnDate();
-		bool borrow(string, int);
+		bool borrow(string, int, int, int, int);
 	
 	private:
 		Date dateBorrowed;
@@ -131,7 +131,7 @@ Date Books::calculateReturnDate()
 	Date returnDate(d,m,y);
 	return returnDate;
 }
-bool Books::borrow(string isbn, int stdtID)
+bool Books::borrow(string isbn, int stdtID, int d, int m, int y)
 {
 	bool repeated = false;
 	for (int i=0; i <= cuantityBorrowed; i++)
@@ -148,6 +148,9 @@ bool Books::borrow(string isbn, int stdtID)
 	if (!repeated)
 	{
 		studentList[cuantityBorrowed] = stdtID;
+		dateBorrowed.setDD(d);
+		dateBorrowed.setMM(m);
+		dateBorrowed.setYYYY(y);
 		cuantityBorrowed++;
 	}
 	return !repeated;

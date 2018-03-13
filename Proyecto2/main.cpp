@@ -17,13 +17,12 @@ void showBookList(int bookNum, Books books[10])
 {
 	for (int i = 0; i < bookNum ; i++)
 	{
-		cout << "------------------------------------";
-		cout << "Book #" << i+1;
+		cout << "Book #" << i+1 << endl;
 		cout << "Title: " << books[i].getTitle() << endl;
 		cout << "Library: " << books[i].getLibKey() << endl;
 		cout << "ISBN: " << books[i].getISBN() << endl;
 		cout << "Quantity Borrowed: " << books[i].getCuantityBorrowed() << endl;
-		cout << "------------------------------------";
+		cout << "-------------" << endl;
 	}
 }
 
@@ -31,6 +30,7 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 {
 	string isbn;
 	int stdtID, bookPosition = 0, studentPosition;
+	int dd, mm, yyyy;
 	bool isbnFound = false;
 	bool IDFound = false;
 	cout << "Enter book ISBN\n";
@@ -68,7 +68,15 @@ void BorrowBook(Books book[10],int bookNum, Student stu[15])
 	
 	if (isbnFound && IDFound)
 	{
-		book[bookPosition].borrow(isbn, stdtID);
+		// Getting date of borrowing
+		cout << "Enter date of borrowing\n";
+		cout << "Day: ";
+		cin >> dd;
+		cout << "Month: ";
+		cin >> mm;
+		cout << "Year: ";
+		cin >> yyyy;
+		book[bookPosition].borrow(isbn, stdtID, dd, mm, yyyy);
 		cout << "Book borrowed succesfully." << endl;
 	}
 	else
@@ -152,19 +160,25 @@ void SearchBookByLibraryKey(Books book[10], int bookNum)
 	}
 }
 
-void fillArrays(Library lib[5], Student stu[15])
+void SearchBookByStudent(Books book[10], int bookNum)
+{
+	// Asking user for student 
+}
+
+void fillArrays(Library (&lib)[5], Student (&stu)[15])
 {
     string line, major, name, line2;
     string key, libKey;
     int floor, shelf;
-    int id, count = 0;;
+    int id, count = 0;
 	ifstream students;
 	ifstream library;
     students.open("Alumnos.txt");
     library.open("Biblioteca.txt");
     while(getline(students, line))
     {
-        cin >> id >> major;
+        cin >> id;
+		cin >> major;
         cin.ignore();
         getline(cin, name);
 		stu[count].setStudentId(id);
@@ -182,6 +196,8 @@ void fillArrays(Library lib[5], Student stu[15])
         lib[count].setKey(key);
         count++;
     }
+	students.close();
+	library.close();
 }
 
 int main()
@@ -194,13 +210,16 @@ int main()
     string title, ISBN, LibKey;
     cout << "How many books do you want to register?\n";
     cin >> bookNum;
-    
+	
+	fillArrays(lib, stu);
+
     if (bookNum < 10)
     {
         for (int i = 0; i < bookNum; i++)
         {
             cout << "Enter book "<<i+1<<" title\n";
-            getline(cin, title);
+			cin.ignore();
+			getline(cin, title);
             
             cout << "Enter Library key\n";
             cin >> LibKey;
@@ -219,11 +238,11 @@ int main()
             do {
                 cout << "1) Book List\n";
                 cout << "2) Borrow a book\n";
-                cout << "3) Books to be turned on X date\n";
+                cout << "3) Books to be returned on X date\n";
                 cout << "4) ISBN book search\n";
                 cout << "5) Library book search\n";
                 cout << "6) Student borrowed books\n";
-                cout << "7) Exit";
+                cout << "7) Exit\n";
                 cin >> op;
                 
                 switch (op) {
